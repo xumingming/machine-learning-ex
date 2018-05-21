@@ -30,11 +30,23 @@ X = [ones(m, 1) X];
 %       for each row.
 %       
 
+% calculate the feature count
+k = size(all_theta, 1);
 
-
-
-
-
+% for loop to predict every case
+for i = 1:m
+    
+    % for each case run every classifier
+    q = zeros(k, 1);
+    for j = 1:k
+        % current_theta is (n + 1) * 1
+        current_theta = all_theta(j, :)';
+        % X is m * n + 1, X(i, :) is 1 * n + 1
+        q(j) = sigmoid(X(i, :) * current_theta);
+    end     
+    [max_v, max_index] = max(q);
+    p(i) = max_index;
+end    
 
 % =========================================================================
 

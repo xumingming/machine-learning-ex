@@ -21,14 +21,29 @@ p = zeros(size(X, 1), 1);
 %       can use max(A, [], 2) to obtain the max for each row.
 %
 
+% add the intercept term
+real_X = [ones(m, 1) X];
+               
+% Theta1 is 25X401, real_X is 5000X401, a2 is 5000X25
+a2 = sigmoid(real_X * Theta1');
 
+% real_a2 is 5000X26, Theta2 is 10X26
+% a3 is 5000X10
+real_a2 = [ones(size(a2, 1), 1) a2];
+a3 = sigmoid(real_a2 * Theta2');
 
+% pre_p is 5000X10
+pre_p = a3;
 
-
-
-
-
-
+for i = 1:m
+    % find the largest probability with the corresponding index
+    [target, index] = max(pre_p(i, :));
+    
+    % if there there is a one, set it
+    if round(target) == 1
+        p(i) = index;
+    end
+end    
 % =========================================================================
 
 
