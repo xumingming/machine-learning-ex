@@ -26,9 +26,11 @@ sigma = zeros(1, size(X, 2));
 % Hint: You might find the 'mean' and 'std' functions useful.
 %
 
-mu = mean(X)
-sigma = std(X)
-X_normal = (X - mu) / sigma
+mu = mean(X);                 % 1Xn
+sigma = std(X);               % 1Xn
+
+% X is mXn
+X_norm = bsxfun(@rdivide, (X - mu), sigma);    
 
 % ============================================================
 
